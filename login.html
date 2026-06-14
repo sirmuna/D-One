@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | D-ONE AI</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #060914;
+        --bg2: #0d1225;
+        --card: rgba(255, 255, 255, 0.04);
+        --glass: rgba(255, 255, 255, 0.07);
+        --border: rgba(255, 255, 255, 0.08);
+        --primary: #7c6fef;
+        --primary2: #5eead4;
+        --accent: #f472b6;
+        --text: #e8eaf0;
+        --muted: #8892a4;
+        --heading: #ffffff;
+        --shadow: rgba(124, 111, 239, 0.25);
+        --gradient: linear-gradient(135deg, #7c6fef, #5eead4);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: radial-gradient(circle at top, #1e293b, #020617);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .auth-container {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .auth-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 40px;
+        backdrop-filter: blur(20px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient);
+      }
+
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 12px;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .auth-subtitle {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 32px;
+        font-weight: 300;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      .form-input {
+        width: 100%;
+        background: var(--glass);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 16px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .form-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(124, 111, 239, 0.15);
+      }
+
+      .form-input::placeholder {
+        color: var(--muted);
+      }
+
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        font-size: 13px;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .remember-me input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
+      .forgot-link {
+        color: var(--primary2);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .forgot-link:hover {
+        color: var(--primary);
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 14px;
+        border-radius: 100px;
+        background: var(--gradient);
+        border: none;
+        color: white;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 8px 32px var(--shadow);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px var(--shadow);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: 24px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .divider span {
+        padding: 0 12px;
+      }
+
+      .auth-footer {
+        text-align: center;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .auth-footer a {
+        color: var(--primary2);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+
+      .auth-footer a:hover {
+        color: var(--primary);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13px;
+        margin-bottom: 20px;
+        transition: color 0.2s;
+      }
+
+      .back-link:hover {
+        color: var(--text);
+      }
+
+      .error-message {
+        background: rgba(244, 114, 182, 0.1);
+        border: 1px solid rgba(244, 114, 182, 0.3);
+        color: #f472b6;
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .success-message {
+        background: rgba(94, 234, 212, 0.1);
+        border: 1px solid rgba(94, 234, 212, 0.3);
+        color: #5eead4;
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .auth-card {
+          padding: 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="auth-container">
+      <a href="home.html" class="back-link">← Back to Home</a>
+      <div class="auth-card">
+        <div class="logo">D-ONE AI</div>
+        <p class="auth-subtitle">
+          Welcome back! Log in to continue your journey.
+        </p>
+
+        <div id="error" class="error-message"></div>
+        <div id="success" class="success-message"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-input"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-input"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember" />
+              Remember me
+            </label>
+            <a href="forgot-password.html" class="forgot-link"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button type="submit" class="btn-primary">Log In</button>
+        </form>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const errorDiv = document.getElementById("error");
+      const successDiv = document.getElementById("success");
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const remember = document.getElementById("remember").checked;
+
+        errorDiv.style.display = "none";
+        successDiv.style.display = "none";
+
+        try {
+          const res = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password, remember }),
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            successDiv.textContent = "Login successful! Redirecting...";
+            successDiv.style.display = "block";
+
+            if (data.token) {
+              localStorage.setItem("token", data.token);
+            }
+            if (data.user) {
+              localStorage.setItem("user", JSON.stringify(data.user));
+            }
+
+            setTimeout(() => {
+              window.location.href = "home.html";
+            }, 1500);
+          } else {
+            errorDiv.textContent =
+              data.error || "Login failed. Please try again.";
+            errorDiv.style.display = "block";
+          }
+        } catch (error) {
+          errorDiv.textContent =
+            "Connection error. Please check your internet.";
+          errorDiv.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>
